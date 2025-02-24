@@ -1,9 +1,12 @@
+import 'package:fantacy_quiz/data/source/question_sources.dart';
 import 'package:fantacy_quiz/pages/quiz_page.dart';
 import 'package:fantacy_quiz/widgets/custom_result_container.dart';
 import 'package:flutter/material.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage({super.key});
+  final List<int> selectedAnswers;
+
+  const ResultPage({super.key, required this.selectedAnswers});
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +27,24 @@ class ResultPage extends StatelessWidget {
             ),
             const SizedBox(height: 50),
             const Text(
-              "Results of Fantasy Quiz #156",
+              "Results of Fantasy Quiz",
               style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF24286A)),
             ),
             const SizedBox(height: 30),
-            const CustomResultContainer(icon: Icons.money, title: "SCORE GAINED", number: "120",),
+            CustomResultContainer(
+              icon: Icons.money,
+              title: "SCORE GAINED",
+              number: "${_calculateCorrectAnswers() * 4}",
+            ),
             const SizedBox(height: 4),
-            const CustomResultContainer(icon: Icons.done, title: "CORRECT PREDICTIONS", number: "4",),
+            CustomResultContainer(
+              icon: Icons.done,
+              title: "CORRECT PREDICTIONS",
+              number: "${_calculateCorrectAnswers()}",
+            ),
             const Spacer(),
             InkWell(
               onTap: () => Navigator.of(context).push(
@@ -52,12 +63,20 @@ class ResultPage extends StatelessWidget {
                 ),
               ),
             )
-
-
-
           ],
         ),
       ),
     );
+  }
+
+  int _calculateCorrectAnswers() {
+    int correctAnswers = 0;
+    final data = QuestionSources.correctAnswers;
+    for (int i = 0; i < data.length; i++) {
+      if (data[i] == selectedAnswers[i]) {
+        correctAnswers++;
+      }
+    }
+    return correctAnswers;
   }
 }
