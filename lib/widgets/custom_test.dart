@@ -25,7 +25,7 @@ class CustomTest extends StatelessWidget {
         width: double.infinity,
         height: 66,
         decoration: BoxDecoration(
-          color: const Color(0xFFF4F3F6),
+          color: percentageColor ? const Color(0xFF23D064) : const Color(0xFFF4F3F6),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Row(

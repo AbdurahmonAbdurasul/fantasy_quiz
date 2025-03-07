@@ -90,9 +90,11 @@ class _QuizPageState extends State<QuizPage> {
             ),
             const SizedBox(height: 70),
             Column(
+
               children: data[currentIndex]["answers"]
                   .map<Widget>(
                     (element) => CustomTest(
+                      percentageColor: (anwers.length == currentIndex + 1) && anwers[currentIndex] == data[currentIndex]["answers"].indexOf(element),
                       testLetter: "A",
                       title: element,
                       onTap: () {

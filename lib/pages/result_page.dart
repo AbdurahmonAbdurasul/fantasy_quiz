@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:fantacy_quiz/data/source/question_sources.dart';
-import 'package:fantacy_quiz/pages/quiz_page.dart';
+import 'package:fantacy_quiz/pages/main_page.dart';
 import 'package:fantacy_quiz/widgets/custom_result_container.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ResultPage extends StatelessWidget {
   final List<int> selectedAnswers;
@@ -10,6 +13,7 @@ class ResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _savedData();
     return Scaffold(
       backgroundColor: const Color(0xFFEDE8E2),
       body: Padding(
@@ -48,7 +52,7 @@ class ResultPage extends StatelessWidget {
             const Spacer(),
             InkWell(
               onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const QuizPage())),
+                  MaterialPageRoute(builder: (context) => const MainPage())),
               borderRadius: BorderRadius.circular(10),
               child: Container(
                 height: 60,
@@ -67,6 +71,22 @@ class ResultPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _savedData() async {
+    // var _data = [
+    //   {"id": 0, "correctAnswers": 7, "gainedScore": 28},
+    //   {"id": 1, "correctAnswers": 8, "gainedScore": 32},
+    //   {"id": 2, "correctAnswers": 9, "gainedScore": 36}
+    // ];
+    final pref = await SharedPreferences.getInstance();
+    final List<String> oldData = pref.getStringList("data") ?? [];
+    oldData.add(json.encode({
+      "id": oldData.length,
+      "correctAnswers": _calculateCorrectAnswers(),
+      "gainedScore": _calculateCorrectAnswers() * 4
+    }));
+    await pref.setStringList("data", oldData);
   }
 
   int _calculateCorrectAnswers() {
