@@ -1,5 +1,4 @@
 import 'package:fantacy_quiz/pages/main_page.dart';
-import 'package:fantacy_quiz/pages/quiz_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {

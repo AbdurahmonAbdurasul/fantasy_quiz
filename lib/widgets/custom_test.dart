@@ -1,4 +1,3 @@
-import 'package:fantacy_quiz/pages/result_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomTest extends StatelessWidget {

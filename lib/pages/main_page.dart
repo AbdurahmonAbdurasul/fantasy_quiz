@@ -40,7 +40,19 @@ class _MainPageState extends State<MainPage> {
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10), color: Colors.red),
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xFF51DEE7),
+                      Color(0xFF6BE2E9),
+                      Color(0xFFB0EFFB),
+                      Color(0xFF93D5F8),
+                      Color(0xFF87CDFA),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
                 height: 100,
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +68,20 @@ class _MainPageState extends State<MainPage> {
               data.length,
               (index) => Container(
                 margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                color: Colors.red,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: const LinearGradient(
+                    colors: [
+                      Color(0xFF51DEE7),
+                      Color(0xFF6BE2E9),
+                      Color(0xFFB0EFFB),
+                      Color(0xFF93D5F8),
+                      Color(0xFF87CDFA),
+                    ],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                ),
                 child: ListTile(
                   title: Text(
                       "To'g'ri javoblar soni ${data[index]["correctAnswers"].toString()}"),
